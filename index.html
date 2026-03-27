@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación del Principio de Abierto/Cerrado</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- Menú superior -->
+    <nav class="menu">
+        <ul>
+            <li><a href="beneficios.html">Beneficios e Implicaciones</a></li>
+            <li><a href="aplicacionOrientadaObjetos.html">Aplicación a POO</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Principio de Abierto/Cerrado (OCP)</h1>
+        <p>El Principio de Abierto/Cerrado es uno de los pilares de SOLID en la programación orientada a objetos. 
+        Fue propuesto por Bertrand Meyer en 1988 y establece que las entidades de software deben estar 
+        <strong>abiertas para extensión</strong> pero <strong>cerradas para modificación</strong>.</p>
+    </header>
+
+    <div class="Contenido">
+        <h2>¿Qué significa?</h2>
+        <p>Significa que podemos añadir nuevas funcionalidades sin alterar el código existente. 
+        En lugar de modificar clases ya probadas, se crean nuevas implementaciones que extienden el comportamiento. 
+        Esto se logra mediante el uso de <em>interfaces, herencia y patrones de diseño</em>.</p>
+    </div>
+
+    <div class="Contenido">
+        <h2>¿Cómo funciona?</h2>
+        <p>El principio se aplica creando nuevas clases que extienden el comportamiento sin modificar el código base. 
+    Por ejemplo, tenemos una clase <code>Saludo</code> que define un método <code>mostrar()</code>. 
+    En lugar de cambiar esa clase cada vez que queremos un saludo diferente, 
+    creamos nuevas clases que extienden su comportamiento.</p>
+
+        <pre>
+class Saludo {
+    public void mostrar() {
+        System.out.println("Hola!");
+    }
+}
+
+class SaludoFormal extends Saludo {
+    public void mostrar() {
+        System.out.println("Es un honor dirigirme a usted. Confío plenamente en que la 
+                            presente jornada esté transcurriendo bajo los más estrictos estándares de excelencia y provecho.");
+    }
+}
+
+class SaludoInformal extends Saludo {
+    public void mostrar() {
+        System.out.println("¡Hablalo Calabazo, como me lo trata la laif mi papacho!");
+    }
+}
+        </pre>
+
+         <p>De esta manera, el sistema permite agregar nuevos tipos de saludos 
+    sin modificar la clase original <code>Saludo</code>. 
+    Solo se crean nuevas extensiones que cumplen el principio de abierto/cerrado.</p>
+    </div>
+
+    
+
+    <footer>
+        <small>Hecho por Sebastian Londoño Medina.</small>
+    </footer>
+</body>
+</html>

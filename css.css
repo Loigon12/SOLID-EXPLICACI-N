@@ -1,0 +1,86 @@
+*{
+    font-family: Arial;
+}
+
+body{
+    background-color: rgba(207, 243, 223, 0.685);
+}
+
+h1{
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 10px 50px;
+    background-color: rgb(172, 215, 253);  
+    border: solid black 4px;  
+}
+
+/* Menú superior */
+.menu {
+    background-color: #2c3e50;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: solid 3px black;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+    color: #f39c12;
+}
+
+.Beneficios{
+    width: 40%;
+    position: absolute;
+    top: 150px;
+    left: 40px;
+    background-color: rgb(175, 245, 172);
+    border: solid 2px rgb(61, 61, 61);
+}
+.Implicaciones{
+    width: 40%;
+    position: absolute;
+    top: 150px;
+    right: 40px;
+    background-color: rgb(240, 125, 125);
+    border: solid 2px rgb(61, 61, 61);
+}
+.Imagen1{
+    position: relative;
+    bottom: 0;
+    left: 40px;
+    width: 150px;
+}
+.Imagen2{
+    width: 150px;
+    position: relative;
+    left: 150px;
+}
+.Imagen3{
+    position: relative;
+    bottom: 10px;
+    left: 40px;
+    width: 150px;
+}
+.Imagen4{
+    position: relative;
+    bottom: 20px;
+    left: 80px;
+    width: 250px;
+}
