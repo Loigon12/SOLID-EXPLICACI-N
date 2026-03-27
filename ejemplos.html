@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principio Abierto/Cerrado (OCP)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        /* Menú superior */
+        .menu {
+            background-color: #2c3e50;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: solid 3px black;
+        }
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .menu ul li a:hover {
+            color: #f39c12;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .bad-example {
+            border-left: 5px solid #e74c3c;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+        .good-example {
+            border-left: 5px solid #2ecc71;
+            padding-left: 15px;
+        }
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+<!-- Menú superior -->
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="beneficios.html">Beneficios e Implicaciones</a></li>
+            <li><a href="aplicacionOrientadaObjetos.html">Aplicación a POO</a></li>
+            <li><a href="ejemplos.html">Ejemplos</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>El Principio Abierto/Cerrado (OCP)</h1>
+        <p><strong>Definición:</strong> Las entidades de software deben estar abiertas para su extensión, pero cerradas para su modificación.</p>
+        
+        <hr>
+
+        <div class="bad-example">
+            <h2>Ejemplo Incorrecto (Violando OCP)</h2>
+            <p>En este ejemplo, si queremos agregar una nueva forma (como un Triángulo), tendríamos que entrar a modificar la clase <code>CalculadoraDeAreas</code> agregando más condicionales. Esto rompe el principio porque no está "cerrada a la modificación".</p>
+            <pre><code>
+class CalculadoraDeAreas {
+    calcularArea(forma) {
+        if (forma.tipo === 'circulo') {
+            return Math.PI * forma.radio * forma.radio;
+        } else if (forma.tipo === 'cuadrado') {
+            return forma.lado * forma.lado;
+        }
+        // ¡PELIGRO! Si agregamos un triángulo, hay que modificar esta clase.
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="good-example">
+            <h2>Ejemplo Correcto (Aplicando OCP)</h2>
+            <p>Aquí, delegamos la responsabilidad de calcular el área a cada clase específica. Ahora la <code>CalculadoraDeAreas</code> está "cerrada" a modificaciones. Si queremos agregar un Triángulo, simplemente creamos una nueva clase que extienda de <code>Forma</code>. ¡La calculadora no se toca!</p>
+            <pre><code>
+// Interfaz o clase base
+class Forma {
+    calcularArea() {
+        throw new Error("El método calcularArea() debe ser implementado");
+    }
+}
+
+// Extensión 1: Círculo
+class Circulo extends Forma {
+    constructor(radio) {
+        super();
+        this.radio = radio;
+    }
+    calcularArea() {
+        return Math.PI * this.radio * this.radio;
+    }
+}
+
+// Extensión 2: Cuadrado
+class Cuadrado extends Forma {
+    constructor(lado) {
+        super();
+        this.lado = lado;
+    }
+    calcularArea() {
+        return this.lado * this.lado;
+    }
+}
+
+// La clase que utiliza las formas
+class CalculadoraDeAreas {
+    obtenerArea(forma) {
+        // No le importa qué forma es, solo llama a calcularArea()
+        return forma.calcularArea(); 
+    }
+}
+
+// ¡Para agregar un Triángulo solo creamos una clase nueva!
+class Triangulo extends Forma {
+    constructor(base, altura) {
+        super();
+        this.base = base;
+        this.altura = altura;
+    }
+    calcularArea() {
+        return (this.base * this.altura) / 2;
+    }
+}
+            </code></pre>
+        </div>
+    </div>
+
+</body>
+</html>
